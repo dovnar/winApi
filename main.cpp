@@ -251,8 +251,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			{
 				SendMessage(listBox, LB_GETTEXT, (WPARAM)i, (LPARAM)tempstr);
 				oFile << tempstr;
-
-
+				oFile << L'\n';
 			}
 			oFile.close();
 		}
@@ -269,7 +268,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			GetClientRect(hedit_input, &rect);
 			hFont = CreateFontIndirect(chFont.lpLogFont); 
 			SendMessage(hedit_input, WM_SETFONT, (WPARAM)hFont, 0);
+			SendMessage(hedit_read, WM_SETFONT, (WPARAM)hFont, 0);
+			SendMessage(listBox, WM_SETFONT, (WPARAM)hFont, 0);
 			InvalidateRect(hedit_input, &rect, TRUE);
+			InvalidateRect(hedit_read, &rect, TRUE);
+			InvalidateRect(listBox, &rect, TRUE);
 			//ReleaseDC(hedit_input, hdc);
 			break;
 		}
